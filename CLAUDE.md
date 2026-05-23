@@ -47,3 +47,13 @@ No scope prefix, no ticket references in the subject line, no trailing period.
 - **Test every error branch.** Each `WeatherApiError` subclass must have at least one test asserting the correct type and, where applicable, status code and extra fields (`retry_after`, `raw_response`).
 - **Use `pytest.approx` for floats** — never assert float equality directly.
 - **Run tests:** `pytest` from the project root. All tests must pass before committing.
+
+## Pre-Commit Checklist
+
+Before every commit, verify all five items:
+
+1. **Tests pass.** Run `pytest` and confirm zero failures or errors.
+2. **No public API changes.** Check that `WeatherApiClient`, `WeatherCache`, `Config`, and model `__init__` signatures are unchanged from `main`.
+3. **New error types are handled.** If a new `WeatherApiError` subclass was added, confirm a matching `except` block exists in `main.py`.
+4. **Commit message follows Conventional Commits.** Format is `<type>: <short imperative description>` — no scope, no trailing period, lowercase body.
+5. **No secrets or `.env` values committed.** Confirm `.env` is listed in `.gitignore` and no API keys appear in staged files.
